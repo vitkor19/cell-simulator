@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ICell } from '../interfaces/ICell';
 
 const Cell = (props: ICell) => {
-    console.log('cell draw');
+    // console.log('cell draw');
     return (
         <div
             id={`${props.id}`}

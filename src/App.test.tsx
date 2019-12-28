@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('checks if cell container has 225 children, board size 15 by 15', () => {
+  const { getByTitle } = render(<App />);
+  const cellContainer = getByTitle('cell-container');
+  expect(cellContainer.childNodes.length).toBe(225);
 });

@@ -15,7 +15,7 @@ const App: React.FC = () => {
         <h3>Cell Simulator</h3>
       </header>
       <section>
-        <div className="flex-grid-container">
+        <div title="cell-container" className="flex-grid-container">
           {cellArray && cellArray.map((cell: ICell) => {
             return (
               <Cell
