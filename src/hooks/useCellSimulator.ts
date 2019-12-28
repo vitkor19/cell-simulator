@@ -4,8 +4,17 @@ import { ICell } from '../interfaces/ICell';
 
 const useCellSimulator = (size: number) => {
     const initialCellArray: ICell[] = createInitialStructure(size);
-    const [ cellArray, setCellArray ] = useState(initialCellArray);
-    const [ stepCount, setStepCount ] = useState(0);
+    
+    const [ cellArray, setCellArray ] = useState<ICell[]>(initialCellArray);
+    const [ stepCount, setStepCount ] = useState<number>(0);
+    const [ simulation, setSimulation ] = useState<NodeJS.Timeout>();
+
+    const stopSimulation = () => {
+        if (simulation) {
+            clearInterval(simulation);
+            setSimulation(undefined);
+        }
+    }
     
     // useCallabck is used to increase performance, doesn't redraw cells unless reset button has been pressed
     const handleCellClick = useCallback((e: React.MouseEvent<HTMLElement>) => {
@@ -22,7 +31,7 @@ const useCellSimulator = (size: number) => {
         setCellArray(updatedArray);
     }, [stepCount]);
 
-    const handleStart = () => {
+    const handleNextGeneration = () => {
         const liveCellIds: number[] = [];
 
         cellArray.forEach(cell => {
@@ -51,12 +60,19 @@ const useCellSimulator = (size: number) => {
     const handleReset = () => {
         setCellArray(initialCellArray);
         setStepCount(count => count + 1);
+        stopSimulation();
+    }
+
+    const handleSimulate = () => {
+        stopSimulation();
+        setSimulation(setInterval(handleNextGeneration, 500));
     }
 
     return {
         cellArray,
         handleCellClick,
-        handleStart,
+        handleNextGeneration,
+        handleSimulate,
         handleReset,
     };
 }

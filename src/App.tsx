@@ -7,7 +7,7 @@ import './styles/main.scss';
 
 const App: React.FC = () => {
   const gridSize: number = 15;
-  const { cellArray, handleCellClick, handleStart, handleReset } = useCellSimulator(gridSize);
+  const { cellArray, handleCellClick, handleNextGeneration, handleSimulate, handleReset } = useCellSimulator(gridSize);
 
   return (
     <div className="cell-simulator">
@@ -32,7 +32,13 @@ const App: React.FC = () => {
         <Button
           text="Next Generation"
           color={'primary'}
-          onClick={handleStart}
+          onClick={handleNextGeneration}
+        />
+        &nbsp;
+        <Button
+          text="Simulate"
+          color={'primary'}
+          onClick={handleSimulate}
         />
         &nbsp;
         <Button
