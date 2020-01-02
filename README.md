@@ -12,9 +12,17 @@ Initial board has 3 buttons:
 * 'SIMULATE' - starts simulation and triggers next generation automatically every half a second
 * 'RESET' - clears the board, also stops simulation
 
+Assumptions:
+* Board is square eg. width and height are equal
+* When cells are generated outside the board will come out at the other side, works for 4 corners as well
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+Pulls all necessary third party components for cell simulator to run
 
 ### `npm start`
 
