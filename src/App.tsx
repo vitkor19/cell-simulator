@@ -9,7 +9,7 @@ import './styles/main.scss';
 
 const App: React.FC = () => {
   const [ size, setSize ] = useState<number>(15);
-  const [ speed, setSpeed ] = useState<number>(100);
+  const [ speed, setSpeed ] = useState<number>(300);
   const { cellArray, handleCellClick, handleNextGeneration, handleSimulate, handleReset } = useCellSimulator(size, speed);
   
   const handleSizeChange = (newSize: number) => {
@@ -45,7 +45,7 @@ const App: React.FC = () => {
           <Slider
             min={50}
             max={1000}
-            defaultValue={500}
+            defaultValue={speed}
             valueLabelDisplay={"auto"}
             onChange={(e, value) => (Array.isArray(value) ? setSpeed(value[0]) : setSpeed(value))}
           />
@@ -64,7 +64,7 @@ const App: React.FC = () => {
         <Button
           text="Reset"
           color={"secondary"}
-          onClick={e => handleReset()}
+          onClick={e => handleReset(undefined)}
         />
       </div>
       <div title="cell-container" className="flex-grid-container" style={{'width': `${size * 2}rem`, 'height': `${size * 2}rem`}}>
