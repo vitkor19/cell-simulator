@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { createInitialStructure, getNeighbours } from '../helpers/structure';
 import { ICell } from '../interfaces/ICell';
 
-const useCellSimulator = (size: number) => {
+const useCellSimulator = (size: number, speed: number) => {
     const initialCellArray: ICell[] = createInitialStructure(size);
     
     const [ cellArray, setCellArray ] = useState<ICell[]>(initialCellArray);
@@ -57,15 +57,15 @@ const useCellSimulator = (size: number) => {
         setStepCount(count => count + 1);
     }
     
-    const handleReset = () => {
-        setCellArray(initialCellArray);
+    const handleReset = (cells: ICell[] | undefined) => {
+        setCellArray(cells ? cells : initialCellArray);
         setStepCount(count => count + 1);
         stopSimulation();
     }
 
     const handleSimulate = () => {
         stopSimulation();
-        setSimulation(setInterval(handleNextGeneration, 500));
+        setSimulation(setInterval(handleNextGeneration, speed));
     }
 
     return {
